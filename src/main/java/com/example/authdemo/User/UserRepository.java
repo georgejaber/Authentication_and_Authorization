@@ -1,4 +1,4 @@
-package com.example.authdemo.user;
+package com.example.authdemo.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

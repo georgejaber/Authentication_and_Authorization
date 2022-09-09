@@ -1,32 +1,24 @@
-package com.example.authdemo;
+package com.example.authdemo.AuthRequirement;
 
-import com.example.authdemo.user.AuthUserDetailsService;
+import com.example.authdemo.Filter.AuthFilter;
+import com.example.authdemo.User.AuthUserDetailsService;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 public class AuthConfiguration{
 
-    //
     AuthUserDetailsService service;
 
     public AuthConfiguration(AuthUserDetailsService service) {
@@ -43,7 +35,7 @@ public class AuthConfiguration{
     {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(service);
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance() );//new BCryptPasswordEncoder());
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
         return provider;
     }
 
@@ -58,6 +50,7 @@ public class AuthConfiguration{
                 .antMatchers("/user").hasAnyRole("ADMIN","USER")
                 .antMatchers("/").permitAll()
                 .antMatchers("/auth").permitAll()
+                .antMatchers("/register").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin()

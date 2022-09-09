@@ -1,7 +1,7 @@
-package com.example.authdemo;
+package com.example.authdemo.Filter;
 
-import com.example.authdemo.jwt.jwtUtilClass;
-import com.example.authdemo.user.AuthUserDetailsService;
+import com.example.authdemo.JWT.jwtUtilClass;
+import com.example.authdemo.User.AuthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -25,6 +25,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
         final String header = request.getHeader("Authorization");
         final SecurityContext context = SecurityContextHolder.getContext();
         String email="";

@@ -1,4 +1,4 @@
-package com.example.authdemo;
+package com.example.authdemo.DTO;
 
 public class AuthRequest {
 

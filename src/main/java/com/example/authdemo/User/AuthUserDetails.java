@@ -1,6 +1,5 @@
-package com.example.authdemo.user;
+package com.example.authdemo.User;
 
-import com.example.authdemo.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,13 @@
-package com.example.authdemo;
+package com.example.authdemo.AuthRequirement;
 
 
+import com.example.authdemo.DTO.AuthRequest;
+import com.example.authdemo.DTO.AuthResponse;
+import com.example.authdemo.DTO.UserDTO;
+import com.example.authdemo.User.User;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +19,12 @@ public class AuthController {
     AuthControllerService service;
     public AuthController(AuthControllerService service) {
         this.service = service;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> save(@RequestBody @NotNull UserDTO userDTO) throws Exception {
+       User user = new User(userDTO.getEmail(),userDTO.getPassword(),userDTO.getRole());
+       return new ResponseEntity<>(service.register(user), HttpStatus.CREATED);
     }
 
     @PostMapping ("/auth")
