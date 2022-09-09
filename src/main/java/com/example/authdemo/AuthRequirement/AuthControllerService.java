@@ -46,7 +46,7 @@ public class AuthControllerService {
         return new AuthResponse(Token);
     }
 
-    public User register(@NotNull User user) throws Exception {
+    public AuthResponse register(@NotNull User user) throws Exception {
            String email =user.getEmail();
            if (email.isEmpty())
            {
@@ -59,7 +59,8 @@ public class AuthControllerService {
            user.setPassword(encoder.encode(pass));
 
            try {
-               return repository.save(user);
+               repository.save(user);
+               return login(new AuthRequest(email,pass));
            }
            catch (Exception e)
            {

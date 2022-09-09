@@ -22,7 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> save(@RequestBody @NotNull UserDTO userDTO) throws Exception {
+    public ResponseEntity<AuthResponse> save(@RequestBody @NotNull UserDTO userDTO) throws Exception {
        User user = new User(userDTO.getEmail(),userDTO.getPassword(),userDTO.getRole());
        return new ResponseEntity<>(service.register(user), HttpStatus.CREATED);
     }
