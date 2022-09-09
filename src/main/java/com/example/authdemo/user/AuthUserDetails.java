@@ -1,4 +1,4 @@
-package com.example.authdemo;
+package com.example.authdemo.user;
 
 import com.example.authdemo.user.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +17,7 @@ public class AuthUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_"+user.getRole().toString()));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_"+user.getRole()));
     }
 
     @Override

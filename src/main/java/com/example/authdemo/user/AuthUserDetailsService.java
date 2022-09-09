@@ -1,5 +1,6 @@
-package com.example.authdemo;
+package com.example.authdemo.user;
 
+import com.example.authdemo.user.AuthUserDetails;
 import com.example.authdemo.user.User;
 import com.example.authdemo.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

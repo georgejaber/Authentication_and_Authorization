@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class User {
-    public User(String email, String password, UserRole.Role role) {
+    public User(String email, String password, Role role) {
         this.email = email;
         this.password = password;
         this.role = role;
@@ -17,6 +17,13 @@ public class User {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
 
     public String getEmail() {
         return email;
@@ -34,20 +41,13 @@ public class User {
         this.password = password;
     }
 
-    public UserRole.Role getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(UserRole.Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private UserRole.Role role;
 
     public User() {
 
